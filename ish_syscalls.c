@@ -334,7 +334,7 @@ int ish_close(int fd) {
 		return -1;
 	#endif
 }
-pid_t ish_fork(void) {
+int ish_fork(void) {
 	#if defined(__i386__) || defined(__x86_64__)
 		#if defined(__APPLE__)
 			#if defined(__x86_64__)
@@ -375,7 +375,11 @@ pid_t ish_fork(void) {
 		return -1;
 	#endif
 }
-int ish_execve(const char *filename, char *const argv[], char *const envp[]) {
+int ish_execve(
+        const char *path,
+        char *const arguments[],
+        char *const environment[]
+    ) {
 	#if defined(__i386__) || defined(__x86_64__)
 		#if defined(__APPLE__)
 			#if defined(__x86_64__)
@@ -416,7 +420,7 @@ int ish_execve(const char *filename, char *const argv[], char *const envp[]) {
 		return -1;
 	#endif
 }
-pid_t ish_waitpid(pid_t pid, int *status, int options, struct rusage *rusage) {
+int ish_waitpid(int pid, int *status, int options) {
 	#if defined(__i386__) || defined(__x86_64__)
 		#if defined(__APPLE__)
 			#if defined(__x86_64__)
@@ -457,7 +461,11 @@ pid_t ish_waitpid(pid_t pid, int *status, int options, struct rusage *rusage) {
 		return -1;
 	#endif
 }
-ssize_t ish_write(int fd, const void *buf, size_t count) {
+long ish_write(
+        int file_descriptor,
+        const void *buffer,
+        unsigned long buffer_size
+     ) {
 	#if defined(__i386__) || defined(__x86_64__)
 		#if defined(__APPLE__)
 			#if defined(__x86_64__)
